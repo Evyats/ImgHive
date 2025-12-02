@@ -14,28 +14,22 @@ Local microservices stack for:
 
 ## First-time setup
 Frontend deps:
-
 `npm --prefix frontend install`
 
 Storage folders:
-
 `mkdir s3\image-storage s3\temp-storage`
 
 ## Start all services
 MongoDB:
-
 `docker compose -f backend\image-db\docker-compose.yml up`
 
 Backend API:
-
 `docker compose -f backend\image-service\docker-compose.yml up`
 
 Upload pipeline (redis/producer/consumer):
-
 `docker compose -f backend\image-upload\docker-compose.yml up`
 
 Frontend:
-
 `npm --prefix frontend run dev`
 
 ## Access
