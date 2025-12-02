@@ -1,0 +1,16 @@
+services:
+  image-service:
+    build: .
+    container_name: image-service
+    env_file:
+      - .env_docker
+    ports:
+      - "8038:8000"
+    volumes:
+      - .:/app
+      - ../../s3:/s3
+    command: >
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port 8000
+      --reload

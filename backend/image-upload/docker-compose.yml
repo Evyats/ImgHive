@@ -1,0 +1,36 @@
+
+services:
+
+  broker:
+    image: redis:7
+    container_name: redis-broker
+    ports:
+      - "6379:6379"
+
+  producer:
+    build: .
+    container_name: producer
+    env_file:
+      - .env_docker
+    ports:
+      - "8056:8000"
+    volumes:
+      - ../../s3:/s3
+    command: >
+      uvicorn app.producer:app
+      --host 0.0.0.0
+      --port 8000
+    depends_on:
+      - broker
+
+  consumer:
+    build: .
+    container_name: consumer
+    env_file:
+      - .env_docker
+    volumes:
+      - ../../s3:/s3
+    command: >
+      celery -A app.consumer worker -P solo
+    depends_on:
+      - broker

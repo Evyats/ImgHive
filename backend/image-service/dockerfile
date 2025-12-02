@@ -1,0 +1,15 @@
+# 1) Base image
+FROM python:3.13.6-slim
+
+# 2) Workdir
+WORKDIR /app
+
+# 3) Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 4) Copy source code
+COPY . .
+
+# 5) Run the app with uvicorn
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
