@@ -1,3 +1,4 @@
+<img src="frontend/src/assets/ImgHive_logo.png" />
 
 ## Overview
 Local microservices stack for:
